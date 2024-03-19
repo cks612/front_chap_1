@@ -32,17 +32,21 @@ class HardWork {
   }
 
   do() {
-    const handleExecuteTask = (idx) => {
-      for (let i = 0; i < this._tasks.length; i++) {
-        if (i < idx) {
-          setTimeout(() => {
-            this._tasks[i]();
-            handleExecuteTask(idx + 1);
-          }, 0);
-        }
-      }
-    };
-    handleExecuteTask(1);
+    // const handleExecuteTask = (idx) => {
+    //   for (let i = 0; i < this._tasks.length; i++) {
+    //     if (i < idx) {
+    //       setTimeout(() => {
+    //         this._tasks[i]();
+    //         handleExecuteTask(idx + 1);
+    //       }, i);
+    //     }
+    //   }
+    // };
+    // handleExecuteTask(1);
+
+    for (let i = 0; i < this._tasks.length; i++) {
+      setTimeout(() => this._tasks[i](), i);
+    }
   }
   // do() 이외의 메서드는 수정하지마세요
   get result() {
