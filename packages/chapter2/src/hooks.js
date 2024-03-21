@@ -1,25 +1,27 @@
 export function createHooks(callback) {
   let idx = 0;
-  let stateArr = [];
+  let stateObj = {};
   const cacheValue = {};
 
   const useState = (initState) => {
     const currIdx = idx;
 
-    if (stateArr.length === currIdx) {
-      stateArr.push(initState);
+    // 초기값 설정
+    if (!stateObj.hasOwnProperty(currIdx)) {
+      stateObj[currIdx] = initState;
     }
 
-    const state = stateArr[currIdx];
+    // 상태 할당
+    const state = stateObj[currIdx];
 
     const setState = (newState) => {
-      // 새로운 값 할당
-      stateArr[currIdx] = newState;
+      // 새로운 상태를 객체에 할당
+      stateObj[currIdx] = newState;
       callback();
     };
 
+    // 실행된 횟수를 1 증가시켜 다음 값으로 push 할 수 있게 함
     idx++;
-
     return [state, setState];
   };
 
